@@ -46,7 +46,7 @@ const NavbarThree = () => {
               <nav className="navbar navbar-expand-md navbar-light">
                 <Link href="/">
                   <a className="navbar-brand">
-                    <img src="/images/black-logo.png" alt="Site logo" />
+                    <img src="/images/owley-logo-black.png" alt="Site logo" />
                   </a>
                 </Link>
 

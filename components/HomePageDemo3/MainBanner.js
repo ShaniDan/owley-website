@@ -1,7 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
+import baseUrl from "@/utils/baseUrl";
+import axios from "axios";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+const MySwal = withReactContent(Swal);
+
+const alertContent = () => {
+  MySwal.fire({
+    title: "Congratulations!",
+    text: "You have successfully subscribed to our newsletter",
+    icon: "success",
+    timer: 2000,
+    timerProgressBar: true,
+    showConfirmButton: false,
+  });
+};
+// Form initial state
+const INITIAL_STATE = {
+  email: "",
+};
 
 const MainBanner = () => {
+  const [subscribe, setSubscribe] = useState(INITIAL_STATE);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setSubscribe((prevState) => ({ ...prevState, [name]: value }));
+    // console.log(subscribe)
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const url = `${baseUrl}/api/subscribe`;
+      const { email } = subscribe;
+      const payload = { email };
+      const response = await axios.post(url, payload);
+      console.log(response);
+      setSubscribe(INITIAL_STATE);
+      alertContent();
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <div id="header" className="main-banner-area">
@@ -36,17 +76,19 @@ const MainBanner = () => {
                     data-aos-once="true"
                   >
 
-                    <form className="newsletter-form">
+                    <form className="newsletter-form" onSubmit={handleSubmit}>
                       <input
                         type="email"
                         className="input-newsletter"
+                        value={subscribe.email}
+                        onChange={handleChange}
                         placeholder="Enter your email"
-                        name="EMAIL"
+                        name="email"
                         required
                       />
 
                       <button type="submit" className="default-btn">
-                        Join The Waitlist
+                        Sign Up For Testing
                       </button>
                     </form>
                   </div>

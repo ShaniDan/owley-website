@@ -31,7 +31,7 @@ function MyApp({ Component, pageProps }) {
     <>
       <Head>
         <title>
-          Stax - React Next.js IT Services & Startup Template
+          Owley.ai - Revolutionize Your Study Habits with Owley
         </title>
         <meta 
           name="viewport" 
