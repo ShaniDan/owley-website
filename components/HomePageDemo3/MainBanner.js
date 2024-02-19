@@ -31,7 +31,7 @@ const MainBanner = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = `/api/subscribe`;
+      const url = `${baseUrl}/api/subscribe`;
       const { email } = subscribe;
       const payload = { email };
       const response = await axios.post(url, payload);
